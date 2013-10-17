@@ -10,8 +10,26 @@ https://github.com/chototsu/libgdx-mikumikustudio
 
 動作が安定した時点でこのリポジトリはMikuMikuStudioと統合する予定です。
 ## 実行方法
-実行にはsbtが必要です。
-まずプロジェクトのディレクトリでsbtを起動してください。
+実行にはsbtとRoboVMが必要です。下記のURLからダウンロードしインストールして下さい。
+
+SBT
+http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html
+
+RoboVM
+http://www.robovm.org/
+
+環境変数
+
+ROBOVM_HOMEにRoboVMをインストールしたディレクトリをセットして下さい。
+
+例
+
+    export ROBOVM_HOME=~/robovm-0.0.5
+
+プロジェクトのディレクトリでsbtを起動してください。
+
+    sbt
+
 ### Macで実行
     desktop/run
 ### iOSシミュレータで実行

@@ -3,6 +3,10 @@ mikumikustudio-gdx
 
 MikuMikuStudio for libgdx.
 
+![Screenshot1](https://googledrive.com/host/0B_-F-kj1SY0cbGlnQUpMOV90ZDA/mikumikustudio-gdx-screenshot1.png)
+
+[YouTube](http://youtu.be/l26_Wr7PtoU)
+
 ## MikuMikuStudio-gdxとは
 MikuMikuStudio-gdxはMikuMikuStudioのlibgdx用の実装です。libgdx上にMikuMikuStudioを実装する事により、iOS対応を実現させました。
 現在MikuMikuStudio-gdxはMacとiOSに対応しています。その他の環境ではnative bulletライブラリを用意していないため、動作しません。もしその他の環境で動作させたい場合は、以下のリポジトリからgdx-bulletをコンパイルしてご使用下さい。

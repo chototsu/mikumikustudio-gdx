@@ -32,7 +32,7 @@ object Settings {
     unmanagedBase <<= baseDirectory(_/"libs"),
     resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx" % "0.9.9-SNAPSHOT"
+      "com.badlogicgames.gdx" % "gdx" % "0.9.9"
     )
   )
 
@@ -40,8 +40,8 @@ object Settings {
     unmanagedResourceDirectories in Compile += file("common/assets"),
     fork in Compile := true,
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "0.9.9-SNAPSHOT",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9-SNAPSHOT" classifier "natives-desktop"
+      "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "0.9.9",
+      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" classifier "natives-desktop"
     )
   )
 
@@ -55,9 +55,9 @@ object Settings {
       scala.io.Source.fromFile(b/"src/main/proguard.cfg").getLines.map(_.takeWhile(_!='#')).filter(_!="").mkString("\n")
     )},
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-android" % "0.9.9-SNAPSHOT",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9-SNAPSHOT" % "natives" classifier "natives-armeabi",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9-SNAPSHOT" % "natives" classifier "natives-armeabi-v7a"
+      "com.badlogicgames.gdx" % "gdx-backend-android" % "0.9.9",
+      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-armeabi",
+      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-armeabi-v7a"
     ),
     nativeExtractions <<= (baseDirectory) { base => Seq(
       ("natives-armeabi.jar", new ExactFilter("libgdx.so"), base / "lib" / "armeabi"),
@@ -90,8 +90,8 @@ object Settings {
     frameworks := Seq("UIKit", "OpenGLES", "QuartzCore", "CoreGraphics", "OpenAL", "AudioToolbox", "AVFoundation"),
     nativePath <<= (baseDirectory){ bd => Seq(bd / "lib") },
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-robovm" % "0.9.9-SNAPSHOT",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9-SNAPSHOT" % "natives" classifier "natives-ios"
+      "com.badlogicgames.gdx" % "gdx-backend-robovm" % "0.9.9",
+      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-ios"
     ),
     nativeExtractions <<= (baseDirectory) { base => Seq(
       ("natives-ios.jar", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "lib")

@@ -1,6 +1,10 @@
 package com.jme3.system.gdx;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.input.GestureDetector;
 import com.jme3.input.*;
+import com.jme3.input.dummy.DummyKeyInput;
+import com.jme3.input.dummy.DummyMouseInput;
 import com.jme3.renderer.Renderer;
 import com.jme3.renderer.gdx.GdxRenderer;
 import com.jme3.system.AppSettings;
@@ -62,82 +66,12 @@ public class GdxContext implements JmeContext {
 
     @Override
     public MouseInput getMouseInput() {
-        return new MouseInput() {
-            @Override
-            public void setCursorVisible(boolean b) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public int getButtonCount() {
-                return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void initialize() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void update() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void destroy() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public boolean isInitialized() {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void setInputListener(RawInputListener rawInputListener) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public long getInputTimeNanos() {
-                return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        };
+        return new DummyMouseInput();
     }
 
     @Override
     public KeyInput getKeyInput() {
-        return new KeyInput() {
-            @Override
-            public void initialize() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void update() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void destroy() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public boolean isInitialized() {
-                return false;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void setInputListener(RawInputListener rawInputListener) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public long getInputTimeNanos() {
-                return 0;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        };
+        return new DummyKeyInput();
     }
 
     @Override
@@ -147,7 +81,10 @@ public class GdxContext implements JmeContext {
 
     @Override
     public TouchInput getTouchInput() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        GdxInput input = new GdxInput();
+        Gdx.input.setInputProcessor(new GestureDetector(input));
+        return input;
+        //return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

@@ -139,7 +139,7 @@ public class GdxContext implements JmeContext {
                 systemListener.update();
             }
             if (autoFlush) {
-                //renderer.onFrame();
+                renderer.onFrame();
             }
         }
     }

@@ -202,7 +202,7 @@ public final class GdxTGALoader implements AssetLoader {
             rawData = new byte[width * height * 4];
             dl = 4;
         } else {
-            rawData = new byte[width * height * 4];
+            rawData = new byte[width * height * 3];
             dl = 3;
         }
         int rawDataIndex = 0;
@@ -255,7 +255,6 @@ public final class GdxTGALoader implements AssetLoader {
                         rawData[rawDataIndex++] = red;
                         rawData[rawDataIndex++] = green;
                         rawData[rawDataIndex++] = blue;
-                        rawData[rawDataIndex++] = (byte)0xff;
                     }
                 }
                 format = Format.RGB8;
@@ -345,7 +344,6 @@ public final class GdxTGALoader implements AssetLoader {
                                 rawData[rawDataIndex++] = red;
                                 rawData[rawDataIndex++] = green;
                                 rawData[rawDataIndex++] = blue;
-                                rawData[rawDataIndex++] = (byte)0xff;
                             }
                         } else{
                             // Its not RLE packed, but the next <count> pixels are raw.
@@ -357,7 +355,6 @@ public final class GdxTGALoader implements AssetLoader {
                                 rawData[rawDataIndex++] = red;
                                 rawData[rawDataIndex++] = green;
                                 rawData[rawDataIndex++] = blue;
-                                rawData[rawDataIndex++] = (byte)0xff;
                             }
                         }
                     }
@@ -386,7 +383,6 @@ public final class GdxTGALoader implements AssetLoader {
                                 rawData[rawDataIndex++] = red;
                                 rawData[rawDataIndex++] = green;
                                 rawData[rawDataIndex++] = blue;
-                                rawData[rawDataIndex++] = (byte)0xff;
                             }
                         } else{
                             // Its not RLE packed, but the next <count> pixels are raw.
@@ -400,7 +396,6 @@ public final class GdxTGALoader implements AssetLoader {
                                 rawData[rawDataIndex++] = red;
                                 rawData[rawDataIndex++] = green;
                                 rawData[rawDataIndex++] = blue;
-                                rawData[rawDataIndex++] = (byte)0xff;
                             }
                         }
                     }
@@ -469,13 +464,16 @@ public final class GdxTGALoader implements AssetLoader {
         textureImage.setWidth(FastMath.nearestPowerOfTwo(width));
         textureImage.setHeight(FastMath.nearestPowerOfTwo(height));
         if (format != Format.RGBA8) {
-            throw new RuntimeException("Format must be RGBA8");
+            rawData = resize2(width, height, FastMath.nearestPowerOfTwo(width), FastMath.nearestPowerOfTwo(height), rawData);
+            //textureImage.setFormat(Format.RGBA8);
+        } else {
+            rawData = resize(width, height, FastMath.nearestPowerOfTwo(width), FastMath.nearestPowerOfTwo(height), rawData);
         }
-        rawData = resize(width, height, FastMath.nearestPowerOfTwo(width), FastMath.nearestPowerOfTwo(height), rawData);
         ByteBuffer bb = BufferUtils.createByteBuffer(rawData.length);
         for(int i=0;i<rawData.length;i++) {
             bb.put(rawData[i]);
         }
+        bb.position(0);
         textureImage.setData(bb);
         System.out.println("pixelDepth = "+pixelDepth);
         return textureImage;
@@ -530,6 +528,9 @@ public final class GdxTGALoader implements AssetLoader {
     private static byte[] resize(int w1,int h1, int w2, int h2, byte[] buf) {
 //        w2 = w1;
 //        h2 = h1;
+        if (w1 == w2 && h1 == h2) {
+            return buf;
+        }
         byte[] out = new byte[w2 * h2 * 4];
         float f1 = ((float)w1) / (float)w2;
         float f2 = ((float)h1) / (float)h2;
@@ -541,6 +542,28 @@ public final class GdxTGALoader implements AssetLoader {
                 }
                 for(int i=0;i<4;i++) {
                     out[(x + y * w2)*4+i] = buf[index * 4 + i];
+                }
+            }
+        }
+        return out;
+    }
+    private static byte[] resize2(int w1,int h1, int w2, int h2, byte[] buf) {
+//        w2 = w1;
+//        h2 = h1;
+        if (w1 == w2 && h1 == h2) {
+            //return buf;
+        }
+        byte[] out = new byte[w2 * h2 * 3];
+        float f1 = ((float)w1) / (float)w2;
+        float f2 = ((float)h1) / (float)h2;
+        for(int x = 0;x<w2;x++) {
+            for(int y = 0;y<h2;y++) {
+                int index = (int)(((int)(f2 * (float)y)) * (float)w1 + f1 * (float)x);
+                if (index >= w1 * h1) {
+                    index = 0;
+                }
+                for(int i=0;i<3;i++) {
+                    out[(x + y * w2)*3+i] = buf[index * 3 + i];
                 }
             }
         }

@@ -4,6 +4,7 @@ import com.jme3.app.Application;
 import com.jme3.asset.*;
 import com.jme3.asset.gdx.GdxAssetManager;
 import com.jme3.audio.*;
+import com.jme3.system.gdx.GdxAudioRenderer;
 import com.jme3.system.gdx.GdxContext;
 import com.jme3.util.AndroidLogHandler;
 //import com.jme3.audio.DummyAudioRenderer;
@@ -64,72 +65,7 @@ public class JmeSystem {
 
     // TODO
     public static AudioRenderer newAudioRenderer(AppSettings settings) {
-        return new AudioRenderer() {
-            @Override
-            public void setListener(Listener listener) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void setEnvironment(Environment environment) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void playSourceInstance(AudioNode audioNode) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void playSource(AudioNode audioNode) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void pauseSource(AudioNode audioNode) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void stopSource(AudioNode audioNode) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void updateSourceParam(AudioNode audioNode, AudioParam audioParam) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void updateListenerParam(Listener listener, ListenerParam listenerParam) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void deleteFilter(Filter filter) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void deleteAudioData(AudioData audioData) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void initialize() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void update(float v) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void cleanup() {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-        };
+        return new GdxAudioRenderer();
     }
 
 //    public static void setResources(Resources res) {

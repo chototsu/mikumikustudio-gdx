@@ -287,7 +287,7 @@ public class GdxInput implements TouchInput, InputProcessor, GestureDetector.Ges
         lastPos.set(screenX, Gdx.graphics.getHeight() - screenY);
 
         System.err.println("touchDown x = " + screenX + " y = " + screenY);
-        return true;
+        return false;
     }
 
     @Override
@@ -298,7 +298,7 @@ public class GdxInput implements TouchInput, InputProcessor, GestureDetector.Ges
         event.setTime(System.nanoTime());
         processEvent(event);
         System.err.println("touchUp x = " + screenX + " y = " + screenY);
-        return true;
+        return false;
     }
 
     @Override
@@ -319,7 +319,7 @@ public class GdxInput implements TouchInput, InputProcessor, GestureDetector.Ges
         processEvent(event);
         System.err.println("touchDragged x = " + screenX + " y = " + screenY);
         lastPos.set(screenX, Gdx.graphics.getHeight() - screenY);
-        return true;
+        return false;
     }
 
     @Override
@@ -345,7 +345,7 @@ public class GdxInput implements TouchInput, InputProcessor, GestureDetector.Ges
         processEvent(event);
 //        System.err.println("mouseMoved x = " + screenX + " y = " + screenY);
         lastPos.set(screenX, Gdx.graphics.getHeight() - screenY);
-        return true;
+        return false;
     }
 
     @Override
@@ -409,7 +409,12 @@ public class GdxInput implements TouchInput, InputProcessor, GestureDetector.Ges
 
     @Override
     public boolean zoom(float initialDistance, float distance) {
-        System.err.println("zoom");
+        System.err.println("zoom "+initialDistance+" "+distance);
+        TouchEvent event = getNextFreeTouchEvent();
+        event.set(TouchEvent.Type.SCALE_MOVE, initialDistance, distance, 0, 0);
+        event.setPointerId(0);
+        event.setTime(System.nanoTime());
+        processEvent(event);
         return false;
     }
 

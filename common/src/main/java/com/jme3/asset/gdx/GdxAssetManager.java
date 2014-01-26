@@ -2,6 +2,7 @@ package com.jme3.asset.gdx;
 
 import com.jme3.asset.*;
 import com.jme3.material.Material;
+import com.jme3.system.gdx.GdxAudioLoader;
 import com.jme3.texture.Texture;
 import com.jme3.texture.plugins.gdx.GdxTGALoader;
 import com.jme3.texture.plugins.gdx.GdxImageLoader;
@@ -18,7 +19,9 @@ public class GdxAssetManager extends DesktopAssetManager {
     public GdxAssetManager() {
         super(true);
         registerLoader(GdxTGALoader.class, "tga");
-        this.registerLoader(GdxImageLoader.class, "jpg", "bmp", "gif", "png", "jpeg");
+        this.registerLoader(GdxImageLoader.class, "jpg", "bmp", "gif", "png", "jpeg","spa","sph");
+        this.registerLoader(GdxAudioLoader.class, "wav", "mp3", "ogg");
+        this.registerLocator("/", MMSGdxZipLocator.class);
     }
 
     @Override

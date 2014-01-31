@@ -28,7 +28,7 @@ ROBOVM_HOMEにRoboVMをインストールしたディレクトリをセットし
 
 例
 
-    export ROBOVM_HOME=~/robovm-0.0.5
+    export ROBOVM_HOME=~/robovm-0.0.8
 
 プロジェクトのディレクトリでsbtを起動してください。
 
@@ -47,9 +47,6 @@ https://github.com/chototsu/libgdx-mikumikustudio
 * 音楽再生、Input処理は未実装です。
 
 ## TODO
-* gdx-bulletをRoboVMで完全に動作するよう修正する。
-* Linux,Windows, Android用のgdx-bulletを用意する。
-* 音楽再生、Input処理を実装する。
 
 ## License
 new BSD license

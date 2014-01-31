@@ -21,7 +21,6 @@ public class GdxAssetManager extends DesktopAssetManager {
         registerLoader(GdxTGALoader.class, "tga");
         this.registerLoader(GdxImageLoader.class, "jpg", "bmp", "gif", "png", "jpeg","spa","sph");
         this.registerLoader(GdxAudioLoader.class, "wav", "mp3", "ogg");
-        this.registerLocator("/", MMSGdxZipLocator.class);
     }
 
     @Override

@@ -38,6 +38,12 @@ ROBOVM_HOMEにRoboVMをインストールしたディレクトリをセットし
     desktop/run
 ### iOSシミュレータで実行
     ios/iphone-sim
+### iOS端末（実機）で実行
+    ios/device
+### ipa作成
+    ios/ipa
+### Android端末で実行
+    android/start
 ## native bulletライブラリについて
 native bulletはlibgdxのgdx-bulletにMikuMikuStudioのnative bulletライブラリをマージした物を使用しています。ソースはこちらです。
 https://github.com/chototsu/libgdx-mikumikustudio

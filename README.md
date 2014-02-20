@@ -9,10 +9,9 @@ MikuMikuStudio for libgdx.
 
 ## MikuMikuStudio-gdxとは
 MikuMikuStudio-gdxはMikuMikuStudioのlibgdx用の実装です。libgdx上にMikuMikuStudioを実装する事により、iOS対応を実現させました。
-現在MikuMikuStudio-gdxはMacとiOSに対応しています。その他の環境ではnative bulletライブラリを用意していないため、動作しません。もしその他の環境で動作させたい場合は、以下のリポジトリからgdx-bulletをコンパイルしてご使用下さい。
+現在MikuMikuStudio-gdxはMacとWindows, Linux, Android, iOSに対応しています。
 https://github.com/chototsu/libgdx-mikumikustudio
 
-動作が安定した時点でこのリポジトリはMikuMikuStudioと統合する予定です。
 ## 実行方法
 実行にはsbtとRoboVMが必要です。下記のURLからダウンロードしインストールして下さい。
 
@@ -28,13 +27,13 @@ ROBOVM_HOMEにRoboVMをインストールしたディレクトリをセットし
 
 例
 
-    export ROBOVM_HOME=~/robovm-0.0.8
+    export ROBOVM_HOME=~/robovm-0.0.9
 
 プロジェクトのディレクトリでsbtを起動してください。
 
     sbt
 
-### Macで実行
+### Windows, Mac, Linuxで実行
     desktop/run
 ### iOSシミュレータで実行
     ios/iphone-sim
@@ -48,11 +47,5 @@ ROBOVM_HOMEにRoboVMをインストールしたディレクトリをセットし
 native bulletはlibgdxのgdx-bulletにMikuMikuStudioのnative bulletライブラリをマージした物を使用しています。ソースはこちらです。
 https://github.com/chototsu/libgdx-mikumikustudio
 
-## 注意
-* RoboVMのJNIの実装が不完全なため、メモリリークが発生する可能性があります。
-* 音楽再生、Input処理は未実装です。
-
-## TODO
-
 ## License
-new BSD license
+BSD

@@ -21,7 +21,8 @@ object Settings {
       "org.scalacheck" %% "scalacheck" % "1.10.1" % "test",
       "com.github.axel22" %% "scalameter" % "0.3" % "test",
       "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1" % "test",
-      "info.projectkyoto" % "mmstestdata" % "0.1-SNAPSHOT"
+      "info.projectkyoto" % "mmstestdata" % "0.1-SNAPSHOT",
+      "info.projectkyoto" % "mms-gdx" % "0.8.0"
     ),
     parallelExecution in Test := false,
     testFrameworks in Test += scalameter,
@@ -83,7 +84,7 @@ object Settings {
       ,"projectkyoto.jme3.mmd.PMDLoaderGLSLSkinning2"
       ,"projectkyoto.jme3.mmd.VMDLoader"
       ,"java.util.logging.SimpleFormatter"
-
+      ,"com.jme3.system.JmeSystemDelegateImpl"
     ),
     skipPngCrush := true,
     iosInfoPlist <<= (sourceDirectory in Compile){ sd => Some(sd / "Info.plist") },

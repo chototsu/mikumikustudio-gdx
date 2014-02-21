@@ -103,10 +103,10 @@ object Settings {
       "info.projectkyoto" % "mms-gdx-natives-ios" % mmsVersion % "natives"
     ),
     nativeExtractions <<= (baseDirectory) { base => Seq(
-      ("natives-ios", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "target/lib"),
-      ("mms-gdx-natives-ios", new ExactFilter("libgdx-bullet.a"), base / "target/lib")
+      ("natives-ios", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "lib"),
+      ("mms-gdx-natives-ios", new ExactFilter("libgdx-bullet.a"), base / "lib")
     )},
-    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "target/lib") }
+    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "lib") }
   )
 
   lazy val assemblyOverrides = Seq(

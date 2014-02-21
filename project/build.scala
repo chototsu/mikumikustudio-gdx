@@ -9,6 +9,8 @@ import sbtassembly.Plugin._
 import AssemblyKeys._
 
 object Settings {
+  val mmsVersion = "0.8.1-SNAPSHOT"
+  val gdxVersion = "0.9.9"
   lazy val scalameter = new TestFramework("org.scalameter.ScalaMeterFramework")
 
   lazy val common = Defaults.defaultSettings ++ Seq(
@@ -17,12 +19,13 @@ object Settings {
     javacOptions ++= Seq("-encoding", "UTF-8", "-source", "1.6", "-target", "1.6"),
     scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature"),
     resolvers += Resolver.url("mmstestrepo",url("https://raw.github.com/chototsu/testrepo/master/ivy2/")) ( Patterns(false,"[organisation]/[module]/[revision]/[type]s/[artifact].[ext]") ),
+    resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
     libraryDependencies ++= Seq(
       "org.scalacheck" %% "scalacheck" % "1.10.1" % "test",
       "com.github.axel22" %% "scalameter" % "0.3" % "test",
       "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1" % "test",
       "info.projectkyoto" % "mmstestdata" % "0.1-SNAPSHOT",
-      "info.projectkyoto" % "mms-gdx" % "0.8.0"
+      "info.projectkyoto" % "mms-gdx" % mmsVersion
     ),
     parallelExecution in Test := false,
     testFrameworks in Test += scalameter,
@@ -33,7 +36,7 @@ object Settings {
     unmanagedBase <<= baseDirectory(_/"libs"),
     resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx" % "0.9.9"
+      "com.badlogicgames.gdx" % "gdx" % gdxVersion
     )
   )
 
@@ -41,8 +44,9 @@ object Settings {
     unmanagedResourceDirectories in Compile += file("common/assets"),
     fork in Compile := true,
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % "0.9.9",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" classifier "natives-desktop"
+      "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % gdxVersion,
+      "com.badlogicgames.gdx" % "gdx-platform" % gdxVersion classifier "natives-desktop",
+      "info.projectkyoto" % "mms-gdx-natives-desktop" % mmsVersion
     )
   )
 
@@ -56,13 +60,17 @@ object Settings {
       scala.io.Source.fromFile(b/"src/main/proguard.cfg").getLines.map(_.takeWhile(_!='#')).filter(_!="").mkString("\n")
     )},
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-android" % "0.9.9",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-armeabi",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-armeabi-v7a"
+      "com.badlogicgames.gdx" % "gdx-backend-android" % gdxVersion,
+      "com.badlogicgames.gdx" % "gdx-platform" % gdxVersion % "natives" classifier "natives-armeabi",
+      "com.badlogicgames.gdx" % "gdx-platform" % gdxVersion % "natives" classifier "natives-armeabi-v7a",
+      "info.projectkyoto" % "mms-gdx-natives-android" % mmsVersion % "natives"
     ),
-    nativeExtractions <<= (baseDirectory) { base => Seq(
-      ("natives-armeabi.jar", new ExactFilter("libgdx.so"), base / "lib" / "armeabi"),
-      ("natives-armeabi-v7a.jar", new ExactFilter("libgdx.so"), base / "lib" / "armeabi-v7a")
+    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "target/lib") },
+      nativeExtractions <<= (baseDirectory) { base => Seq(
+      ("natives-armeabi-v7a", new ExactFilter("libgdx.so"), base / "target" / "lib" / "armeabi-v7a"),
+      ("mms-gdx-natives-android", new ExactFilter("libbulletjme.so"), base / "target" / "lib" / "armeabi-v7a"),
+      ("mms-gdx-natives-android", new ExactFilter("libbulletjmeneon.so"), base / "target" / "lib" / "armeabi-v7a"),
+      ("mms-gdx-natives-android", new ExactFilter("libgdx-bullet.so"), base / "target" / "lib" / "armeabi-v7a")
     )}
   )
 
@@ -89,14 +97,16 @@ object Settings {
     skipPngCrush := true,
     iosInfoPlist <<= (sourceDirectory in Compile){ sd => Some(sd / "Info.plist") },
     frameworks := Seq("UIKit", "OpenGLES", "QuartzCore", "CoreGraphics", "OpenAL", "AudioToolbox", "AVFoundation"),
-    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib") },
     libraryDependencies ++= Seq(
-      "com.badlogicgames.gdx" % "gdx-backend-robovm" % "0.9.9",
-      "com.badlogicgames.gdx" % "gdx-platform" % "0.9.9" % "natives" classifier "natives-ios"
+      "com.badlogicgames.gdx" % "gdx-backend-robovm" % gdxVersion,
+      "com.badlogicgames.gdx" % "gdx-platform" % gdxVersion % "natives" classifier "natives-ios",
+      "info.projectkyoto" % "mms-gdx-natives-ios" % mmsVersion % "natives"
     ),
     nativeExtractions <<= (baseDirectory) { base => Seq(
-      ("natives-ios.jar", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "lib")
-    )}
+      ("natives-ios", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "target/lib"),
+      ("mms-gdx-natives-ios", new ExactFilter("libgdx-bullet.a"), base / "target/lib")
+    )},
+    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "target/lib") }
   )
 
   lazy val assemblyOverrides = Seq(

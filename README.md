@@ -7,6 +7,8 @@ MikuMikuStudio for libgdx.
 
 [YouTube](http://youtu.be/l26_Wr7PtoU)
 
+[Download from iTunes](https://itunes.apple.com/app/tiny-ar-lite/id806062401?mt=8)
+
 ## MikuMikuStudio-gdxとは
 MikuMikuStudio-gdxはMikuMikuStudioのlibgdx用の実装です。libgdx上にMikuMikuStudioを実装する事により、iOS対応を実現させました。
 現在MikuMikuStudio-gdxはMacとWindows, Linux, Android, iOSに対応しています。

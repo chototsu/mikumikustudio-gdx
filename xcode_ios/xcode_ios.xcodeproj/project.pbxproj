@@ -27,7 +27,6 @@
 		8A95CA2C18B7BD0800482E48 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8A95CA2A18B7BD0800482E48 /* InfoPlist.strings */; };
 		8A95CA2E18B7BD0800482E48 /* libTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95CA2D18B7BD0800482E48 /* libTests.m */; };
 		8A95CA3818B7BD8000482E48 /* TestAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95CA3618B7BD8000482E48 /* TestAppViewController.m */; };
-		8A95CA3918B7BD8000482E48 /* TestAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95CA3618B7BD8000482E48 /* TestAppViewController.m */; };
 		8A95CA3A18B7BD8000482E48 /* TestAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A95CA3718B7BD8000482E48 /* TestAppViewController.xib */; };
 /* End PBXBuildFile section */
 
@@ -405,7 +404,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A95CA3918B7BD8000482E48 /* TestAppViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +691,7 @@
 				8A95CA0B18B7BC8F00482E48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A95CA0C18B7BC8F00482E48 /* Build configuration list for PBXNativeTarget "xcode_iosTests" */ = {
 			isa = XCConfigurationList;
@@ -701,6 +700,7 @@
 				8A95CA0E18B7BC8F00482E48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A95CA2F18B7BD0800482E48 /* Build configuration list for PBXNativeTarget "lib" */ = {
 			isa = XCConfigurationList;
@@ -709,6 +709,7 @@
 				8A95CA3118B7BD0800482E48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A95CA3218B7BD0800482E48 /* Build configuration list for PBXNativeTarget "libTests" */ = {
 			isa = XCConfigurationList;
@@ -717,6 +718,7 @@
 				8A95CA3418B7BD0800482E48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

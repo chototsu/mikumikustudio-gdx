@@ -8,9 +8,13 @@ import sbtrobovm.RobovmPlugin._
 import sbtassembly.Plugin._
 import AssemblyKeys._
 
+import XcodeSettings._
+
 object Settings {
   val mmsVersion = "0.8.1-SNAPSHOT"
   val gdxVersion = "0.9.9"
+
+
   lazy val scalameter = new TestFramework("org.scalameter.ScalaMeterFramework")
 
   lazy val common = Defaults.defaultSettings ++ Seq(
@@ -74,7 +78,7 @@ object Settings {
     )}
   )
 
-  lazy val ios = common ++ natives ++ Seq(
+  lazy val ios = common ++ natives ++ xcodeSettings ++  Seq(
     unmanagedResources in Compile <++= (baseDirectory) map { _ =>
       (file("common/assets") ** "*").get
     },
@@ -106,7 +110,9 @@ object Settings {
       ("natives-ios", new ExactFilter("libgdx.a") | new ExactFilter("libObjectAL.a"), base / "lib"),
       ("mms-gdx-natives-ios", new ExactFilter("libgdx-bullet.a"), base / "lib")
     )},
-    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "lib") }
+    nativePath <<= (baseDirectory){ bd => Seq(bd / "lib", bd / "lib") },
+
+    compile in Compile <<= (compile in Compile) dependsOn(xcodebuild in Compile)
   )
 
   lazy val assemblyOverrides = Seq(

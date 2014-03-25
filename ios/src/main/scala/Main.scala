@@ -45,4 +45,8 @@ class TestAppViewControllerImpl extends TestAppViewController {
   protected override def buttonAction(sender: UIButton): Unit = {
     label1.setText("Hello!!")
   }
+
+  protected override def button2Action(sender: UIButton): Unit = {
+    label1.setText("World!!")
+  }
 }

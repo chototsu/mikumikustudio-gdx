@@ -7,7 +7,7 @@ object Main extends App {
     cfg.title = "My Game"
     cfg.height = 480
     cfg.width = 320
-    cfg.useGL20 = true
+//    cfg.useGL20 = true
     cfg.forceExit = false
     new LwjglApplication(new MyGame(), cfg)
 }

@@ -11,8 +11,8 @@ import AssemblyKeys._
 import XcodeSettings._
 
 object Settings {
-  val mmsVersion = "0.8.1-SNAPSHOT"
-  val gdxVersion = "0.9.9"
+  val mmsVersion = "0.8.2-SNAPSHOT"
+  val gdxVersion = "1.0-SNAPSHOT"
 
 
   lazy val scalameter = new TestFramework("org.scalameter.ScalaMeterFramework")

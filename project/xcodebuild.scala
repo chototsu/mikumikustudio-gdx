@@ -110,13 +110,13 @@ object XcodeSettings {
       (root) =>
         run(Seq("rm","-fr","build"), root)
         (root / "../ios/lib/libappnative.a").delete()
-        run(Seq("xcodebuild", "-sdk", "iphonesimulator7.0", "-target", "xcode_ios"), root)
+        run(Seq("xcodebuild", "-sdk", "iphonesimulator7.1", "-target", "xcode_ios"), root)
         IO.listFiles(root / "build/Release-iphonesimulator/xcode_ios.app") filter (_.getName.endsWith(".nib")) foreach
           (file => IO.copyFile(file, root / "../ios/src/main/Resources" / file.getName))
 
-        run(Seq("xcodebuild", "-sdk", "iphonesimulator7.0", "-target", "lib"), root)
+        run(Seq("xcodebuild", "-sdk", "iphonesimulator7.1", "-target", "lib"), root)
         if ((root / "build/Release-iphonesimulator/liblib.a").exists()) {
-          run(Seq("xcodebuild", "-sdk", "iphoneos7.0", "-target", "lib"), root)
+          run(Seq("xcodebuild", "-sdk", "iphoneos7.1", "-target", "lib"), root)
           run(Seq("lipo", "-create", "build/Release-iphonesimulator/liblib.a", "./build/Release-iphoneos/liblib.a",
             "-output", "../ios/lib/libappnative.a"), root)
         }
